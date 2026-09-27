@@ -55,7 +55,7 @@
       margin: 0 auto;
       padding: 0 20px;
     }
-    header { padding-top: 28px; }
+    header.wrap { padding-top: 28px; padding-bottom: 28px; }
     .brand {
       display: inline-flex;
       align-items: center;
@@ -68,94 +68,7 @@
     }
     .brand svg { width: 28px; height: 28px; }
     main { flex: 1; }
-    .hero { padding-top: 72px; padding-bottom: 56px; }
-    .tag {
-      display: inline-block;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 13px;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 999px;
-      margin-bottom: 24px;
-    }
-    h1 {
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 700;
-      font-size: clamp(44px, 9vw, 88px);
-      line-height: 1;
-      letter-spacing: -.02em;
-      margin: 0 0 24px;
-    }
-    h1 span { color: var(--accent); }
-    .lead {
-      font-size: clamp(18px, 2.4vw, 22px);
-      color: var(--muted);
-      max-width: 34em;
-      margin: 0;
-    }
-    .pillars {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      padding-bottom: 72px;
-    }
-    .pillar {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 24px;
-    }
-    .pillar h2 {
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 500;
-      font-size: 22px;
-      margin: 0 0 6px;
-      color: var(--green);
-    }
-    .pillar p { margin: 0; color: var(--muted); font-size: 15px; }
-    .soon {
-      padding-bottom: 72px;
-    }
-    .soon h2 {
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 500;
-      font-size: 28px;
-      margin: 0 0 8px;
-    }
-    .soon p { margin: 0; color: var(--muted); max-width: 36em; }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      color: var(--ink);
-    }
-    .btn:hover { border-color: var(--accent); }
-    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-    .btn.primary:hover { filter: brightness(1.05); }
-    .cities { padding-bottom: 72px; }
-    .cities-head { padding-bottom: 24px; }
-    .cities-head h2 {
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 500;
-      font-size: 28px;
-      margin: 0 0 4px;
-    }
-    .cities-head p { margin: 0; color: var(--muted); }
+
     .city {
       display: block;
       text-decoration: none;
@@ -219,8 +132,7 @@
       .pill { font-size: 12px; padding: 5px 12px; }
     }
     footer a { color: inherit; }
-    footer {
-      border-top: 1px solid var(--line);
+    footer.wrap {
       padding-top: 20px; padding-bottom: 28px;
       font-size: 14px;
       color: var(--muted);
@@ -236,32 +148,7 @@
   </header>
 
   <main>
-    <section class="hero wrap">
-      <span class="tag">Bientôt près de chez vous</span>
-      <h1>Le festival <span>sans gluten</span>, tout simplement.</h1>
-      <p class="lead">Un festival 100&nbsp;% sans gluten qui s'installe dans les grandes villes de France. Des producteurs, des artisans, des gourmands, et rien de superflu.</p>
-    </section>
-
-    <section class="pillars wrap" aria-label="Notre esprit">
-      <div class="pillar">
-        <h2>À taille humaine</h2>
-        <p>Un lieu où l'on prend le temps de discuter avec les exposants.</p>
-      </div>
-      <div class="pillar">
-        <h2>Entrée symbolique</h2>
-        <p>Le sans gluten doit être accessible à tous, dès la porte d'entrée.</p>
-      </div>
-      <div class="pillar">
-        <h2>Simple et vrai</h2>
-        <p>Pas de grands décors : des stands, des produits et des rencontres.</p>
-      </div>
-    </section>
-
-    <section class="cities" aria-labelledby="villes">
-      <div class="cities-head wrap">
-        <h2 id="villes">Les villes</h2>
-        <p>Le festival part en tournée. Cliquez sur votre ville pour être prévenu de la date.</p>
-      </div>
+    <section class="cities" aria-label="Les villes">
       <a class="city c1" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival%20Montpellier&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu%28e%29%20de%20la%20date%20du%20Sans%20Gluten%20Festival%20%C3%A0%20Montpellier.%0A" aria-label="Montpellier : à venir. Être prévenu par mail">
         <div class="wrap">
           <h3 class="city-name">Montpellier<span class="city-region">Palavas-les-Flots · Occitanie</span></h3>
@@ -306,15 +193,6 @@
       </a>
     </section>
 
-    <section class="soon wrap">
-      <h2>Exposants, partenaires</h2>
-      <p>Dates et appel aux exposants seront annoncés ici très prochainement. Écrivez-nous pour être prévenu en premier, ou pour tenir un stand.</p>
-      <div class="actions">
-        <a class="btn primary" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu(e)%20de%20la%20venue%20du%20festival%20dans%20ma%20ville%20%3A%20">Prévenez-moi</a>
-        <a class="btn" href="mailto:contact@sansglutenfestival.fr?subject=Devenir%20exposant%20%E2%80%94%20Sans%20Gluten%20Festival&amp;body=Bonjour%2C%0A%0ANom%20de%20l'entreprise%20%3A%20%0AActivit%C3%A9%20%3A%20%0AVille(s)%20qui%20m'int%C3%A9ressent%20%3A%20%0A">Devenir exposant</a>
-        <a class="btn" href="mailto:contact@sansglutenfestival.fr?subject=Partenariat%20%E2%80%94%20Sans%20Gluten%20Festival">Devenir partenaire</a>
-      </div>
-    </section>
   </main>
 
   <footer class="wrap">
