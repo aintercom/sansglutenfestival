@@ -70,20 +70,21 @@
     main { flex: 1; }
 
     .city {
-      display: block;
-      text-decoration: none;
       color: var(--band-ink);
       background: var(--band-bg);
     }
     .city .wrap {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "name pill" "name form";
+      column-gap: 24px;
+      row-gap: 12px;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
       padding-top: 28px;
       padding-bottom: 28px;
     }
     .city-name {
+      grid-area: name;
       font-family: "Fraunces", Georgia, serif;
       font-weight: 700;
       font-size: clamp(34px, 7vw, 64px);
@@ -100,12 +101,10 @@
       opacity: .8;
       margin-top: 8px;
     }
-    .city-status {
-      flex-shrink: 0;
-      text-align: right;
-    }
     .pill {
-      display: inline-block;
+      grid-area: pill;
+      justify-self: end;
+      align-self: end;
       border: 1.5px solid currentColor;
       border-radius: 999px;
       padding: 6px 16px;
@@ -114,23 +113,68 @@
       letter-spacing: .06em;
       text-transform: uppercase;
     }
-    .city-notify {
-      display: block;
-      font-size: 13px;
-      margin-top: 8px;
-      opacity: .8;
+    .notify {
+      grid-area: form;
+      align-self: start;
+      display: flex;
+      gap: 8px;
+      width: 320px;
     }
-    .city:hover .city-notify, .city:focus-visible .city-notify { opacity: 1; text-decoration: underline; }
-    .city:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+    .notify input {
+      flex: 1;
+      min-width: 0;
+      font: inherit;
+      font-size: 15px;
+      color: var(--band-ink);
+      background: color-mix(in srgb, var(--band-ink) 12%, transparent);
+      border: 1.5px solid color-mix(in srgb, var(--band-ink) 45%, transparent);
+      border-radius: 999px;
+      padding: 10px 16px;
+    }
+    .notify input::placeholder { color: var(--band-ink); opacity: .7; }
+    .notify input:focus { outline: none; border-color: var(--band-ink); }
+    .notify button {
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--band-bg);
+      background: var(--band-ink);
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .notify button:hover { opacity: .9; }
+    .notify-done {
+      grid-area: form;
+      justify-self: end;
+      font-size: 15px;
+      font-weight: 500;
+      margin: 0;
+    }
+    .sr {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
     .c1 { --band-bg: #c8702a; --band-ink: #fffaf1; }
     .c2 { --band-bg: #3f5b3a; --band-ink: #fffaf1; }
     .c3 { --band-bg: #2f5d6e; --band-ink: #fffaf1; }
     .c4 { --band-bg: #e8d9bf; --band-ink: #2b2a24; }
-    @media (max-width: 520px) {
-      .city .wrap { padding-top: 22px; padding-bottom: 22px; }
-      .city-notify { display: none; }
-      .pill { font-size: 12px; padding: 5px 12px; }
+    @media (max-width: 640px) {
+      .city .wrap {
+        grid-template-areas: "name pill" "form form";
+        row-gap: 16px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+      .pill { align-self: start; font-size: 12px; padding: 5px 12px; }
+      .notify { width: 100%; }
+      .notify-done { justify-self: start; }
     }
+    .legal { font-size: 12px; margin: 6px 0 0; }
     footer a { color: inherit; }
     footer.wrap {
       padding-top: 20px; padding-bottom: 28px;
@@ -149,54 +193,108 @@
 
   <main>
     <section class="cities" aria-label="Les villes">
-      <a class="city c1" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival%20Montpellier&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu%28e%29%20de%20la%20date%20du%20Sans%20Gluten%20Festival%20%C3%A0%20Montpellier.%0A" aria-label="Montpellier : à venir. Être prévenu par mail">
+      <div class="city c1">
         <div class="wrap">
           <h3 class="city-name">Montpellier<span class="city-region">Palavas-les-Flots · Occitanie</span></h3>
-          <div class="city-status"><span class="pill">À venir</span><span class="city-notify">Prévenez-moi →</span></div>
+          <span class="pill">À venir</span>
+          <form class="notify" data-city="Montpellier">
+            <label class="sr" for="email-montpellier">Votre email pour être prévenu de la date à Montpellier</label>
+            <input type="email" id="email-montpellier" name="email" placeholder="Votre email" autocomplete="email" required>
+            <button type="submit">OK</button>
+          </form>
         </div>
-      </a>
-      <a class="city c2" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival%20Paris&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu%28e%29%20de%20la%20date%20du%20Sans%20Gluten%20Festival%20%C3%A0%20Paris.%0A" aria-label="Paris : à venir. Être prévenu par mail">
+      </div>
+      <div class="city c2">
         <div class="wrap">
           <h3 class="city-name">Paris<span class="city-region">Île-de-France</span></h3>
-          <div class="city-status"><span class="pill">À venir</span><span class="city-notify">Prévenez-moi →</span></div>
+          <span class="pill">À venir</span>
+          <form class="notify" data-city="Paris">
+            <label class="sr" for="email-paris">Votre email pour être prévenu de la date à Paris</label>
+            <input type="email" id="email-paris" name="email" placeholder="Votre email" autocomplete="email" required>
+            <button type="submit">OK</button>
+          </form>
         </div>
-      </a>
-      <a class="city c3" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival%20Marseille&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu%28e%29%20de%20la%20date%20du%20Sans%20Gluten%20Festival%20%C3%A0%20Marseille.%0A" aria-label="Marseille : à venir. Être prévenu par mail">
+      </div>
+      <div class="city c3">
         <div class="wrap">
           <h3 class="city-name">Marseille<span class="city-region">Provence</span></h3>
-          <div class="city-status"><span class="pill">À venir</span><span class="city-notify">Prévenez-moi →</span></div>
+          <span class="pill">À venir</span>
+          <form class="notify" data-city="Marseille">
+            <label class="sr" for="email-marseille">Votre email pour être prévenu de la date à Marseille</label>
+            <input type="email" id="email-marseille" name="email" placeholder="Votre email" autocomplete="email" required>
+            <button type="submit">OK</button>
+          </form>
         </div>
-      </a>
-      <a class="city c4" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival%20Toulouse&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu%28e%29%20de%20la%20date%20du%20Sans%20Gluten%20Festival%20%C3%A0%20Toulouse.%0A" aria-label="Toulouse : à venir. Être prévenu par mail">
+      </div>
+      <div class="city c4">
         <div class="wrap">
           <h3 class="city-name">Toulouse<span class="city-region">Occitanie</span></h3>
-          <div class="city-status"><span class="pill">À venir</span><span class="city-notify">Prévenez-moi →</span></div>
+          <span class="pill">À venir</span>
+          <form class="notify" data-city="Toulouse">
+            <label class="sr" for="email-toulouse">Votre email pour être prévenu de la date à Toulouse</label>
+            <input type="email" id="email-toulouse" name="email" placeholder="Votre email" autocomplete="email" required>
+            <button type="submit">OK</button>
+          </form>
         </div>
-      </a>
-      <a class="city c1" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival%20Lille&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu%28e%29%20de%20la%20date%20du%20Sans%20Gluten%20Festival%20%C3%A0%20Lille.%0A" aria-label="Lille : à venir. Être prévenu par mail">
+      </div>
+      <div class="city c1">
         <div class="wrap">
           <h3 class="city-name">Lille<span class="city-region">Hauts-de-France</span></h3>
-          <div class="city-status"><span class="pill">À venir</span><span class="city-notify">Prévenez-moi →</span></div>
+          <span class="pill">À venir</span>
+          <form class="notify" data-city="Lille">
+            <label class="sr" for="email-lille">Votre email pour être prévenu de la date à Lille</label>
+            <input type="email" id="email-lille" name="email" placeholder="Votre email" autocomplete="email" required>
+            <button type="submit">OK</button>
+          </form>
         </div>
-      </a>
-      <a class="city c2" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival%20Rennes&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu%28e%29%20de%20la%20date%20du%20Sans%20Gluten%20Festival%20%C3%A0%20Rennes.%0A" aria-label="Rennes : à venir. Être prévenu par mail">
+      </div>
+      <div class="city c2">
         <div class="wrap">
           <h3 class="city-name">Rennes<span class="city-region">Bretagne</span></h3>
-          <div class="city-status"><span class="pill">À venir</span><span class="city-notify">Prévenez-moi →</span></div>
+          <span class="pill">À venir</span>
+          <form class="notify" data-city="Rennes">
+            <label class="sr" for="email-rennes">Votre email pour être prévenu de la date à Rennes</label>
+            <input type="email" id="email-rennes" name="email" placeholder="Votre email" autocomplete="email" required>
+            <button type="submit">OK</button>
+          </form>
         </div>
-      </a>
-      <a class="city c3" href="mailto:contact@sansglutenfestival.fr?subject=Pr%C3%A9venez-moi%20%E2%80%94%20Sans%20Gluten%20Festival%20Gen%C3%A8ve&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20%C3%AAtre%20pr%C3%A9venu%28e%29%20de%20la%20date%20du%20Sans%20Gluten%20Festival%20%C3%A0%20Gen%C3%A8ve.%0A" aria-label="Genève : à venir. Être prévenu par mail">
+      </div>
+      <div class="city c3">
         <div class="wrap">
           <h3 class="city-name">Genève<span class="city-region">Suisse</span></h3>
-          <div class="city-status"><span class="pill">À venir</span><span class="city-notify">Prévenez-moi →</span></div>
+          <span class="pill">À venir</span>
+          <form class="notify" data-city="Genève">
+            <label class="sr" for="email-geneve">Votre email pour être prévenu de la date à Genève</label>
+            <input type="email" id="email-geneve" name="email" placeholder="Votre email" autocomplete="email" required>
+            <button type="submit">OK</button>
+          </form>
         </div>
-      </a>
+      </div>
     </section>
 
   </main>
 
   <footer class="wrap">
     © 2026 Sans Gluten Festival · <a href="mailto:contact@sansglutenfestival.fr">contact@sansglutenfestival.fr</a>
+    <p class="legal">Votre email sert uniquement à vous prévenir de la date du festival dans votre ville. Désinscription à tout moment.</p>
   </footer>
+  <script>
+    // Pas encore de service d'inscription (Brevo à brancher) : en attendant,
+    // l'inscription passe par un mail pré-rempli vers contact@.
+    document.querySelectorAll('.notify').forEach(function (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var city = form.dataset.city;
+        var email = form.email.value.trim();
+        var subject = 'Prévenez-moi — Sans Gluten Festival ' + city;
+        var body = 'Bonjour,\n\nMerci de me prévenir de la date du Sans Gluten Festival à ' + city + '.\n\nMon email : ' + email + '\n';
+        window.location.href = 'mailto:contact@sansglutenfestival.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        var done = document.createElement('p');
+        done.className = 'notify-done';
+        done.textContent = 'Merci ! Envoyez le mail qui vient de s’ouvrir pour confirmer.';
+        form.replaceWith(done);
+      });
+    });
+  </script>
 </body>
 </html>
