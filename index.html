@@ -16,7 +16,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/ZingRust-Base.woff2" as="font" type="font/woff2" crossorigin>
   <style>
+    /* Zing Rust — Fontfabric, licence gratuite (usage commercial et web autorisé) */
+    @font-face {
+      font-family: "Zing Rust";
+      src: url("fonts/ZingRust-Base.woff2") format("woff2");
+      font-display: swap;
+    }
     :root {
       --bg: #f6efe3;
       --surface: #fffaf1;
@@ -85,11 +92,11 @@
     }
     .city-name {
       grid-area: name;
-      font-family: "Fraunces", Georgia, serif;
-      font-weight: 700;
-      font-size: clamp(34px, 7vw, 64px);
+      font-family: "Zing Rust", "Fraunces", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(40px, 8vw, 76px);
       line-height: 1;
-      letter-spacing: -.02em;
+      letter-spacing: .01em;
       margin: 0;
     }
     .city-region {
