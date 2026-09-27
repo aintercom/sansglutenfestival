@@ -10,7 +10,7 @@
   <meta property="og:url" content="https://sansglutenfestival.fr/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
-  <meta name="theme-color" content="#f6efe3">
+  <meta name="theme-color" content="#F4ECDC">
   <link rel="canonical" href="https://sansglutenfestival.fr/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,25 +24,23 @@
       src: url("fonts/ZingRust-Base.woff2") format("woff2");
       font-display: swap;
     }
+    /* Palette « Tomate, basilic & framboise » */
     :root {
-      --bg: #f6efe3;
-      --surface: #fffaf1;
-      --ink: #2b2a24;
-      --muted: #6b6558;
-      --accent: #c8702a;
-      --green: #3f5b3a;
-      --line: #e3d7c3;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1d1c18;
-        --surface: #26241f;
-        --ink: #f3ece0;
-        --muted: #b3aa99;
-        --accent: #e59150;
-        --green: #9cbf8f;
-        --line: #3a372f;
-      }
+      --creme: #F4ECDC;
+      --cacao: #2B1810;
+      --tomate: #D8391A;
+      --abricot: #FF8A1E;
+      --moutarde: #F4B400;
+      --citron: #D2EC3C;
+      --basilic: #0F6E3E;
+      --guimauve: #F7B9D2;
+      --framboise: #B3124E;
+      --lavande: #C3A6F4;
+      --prune: #3A1D5C;
+      --bg: var(--creme);
+      --ink: var(--cacao);
+      --muted: #6E5A4C;
+      --accent: var(--tomate);
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; }
@@ -71,7 +69,7 @@
       letter-spacing: .08em;
       text-transform: uppercase;
       font-size: 13px;
-      color: var(--green);
+      color: var(--tomate);
     }
     .brand svg { width: 28px; height: 28px; }
     main { flex: 1; }
@@ -166,10 +164,17 @@
       clip: rect(0 0 0 0);
       white-space: nowrap;
     }
-    .c1 { --band-bg: #c8702a; --band-ink: #fffaf1; }
-    .c2 { --band-bg: #3f5b3a; --band-ink: #fffaf1; }
-    .c3 { --band-bg: #2f5d6e; --band-ink: #fffaf1; }
-    .c4 { --band-bg: #e8d9bf; --band-ink: #2b2a24; }
+    .v-montpellier { --band-bg: var(--tomate); --band-ink: var(--creme); }
+    .v-paris { --band-bg: var(--basilic); --band-ink: var(--creme); }
+    .v-lyon { --band-bg: var(--moutarde); --band-ink: var(--cacao); }
+    .v-marseille { --band-bg: var(--citron); --band-ink: var(--basilic); }
+    .v-toulouse { --band-bg: var(--guimauve); --band-ink: var(--framboise); }
+    .v-bordeaux { --band-bg: var(--framboise); --band-ink: var(--guimauve); }
+    .v-lille { --band-bg: var(--lavande); --band-ink: var(--prune); }
+    .v-nantes { --band-bg: var(--abricot); --band-ink: var(--cacao); }
+    .v-strasbourg { --band-bg: var(--cacao); --band-ink: var(--abricot); }
+    .v-geneve { --band-bg: var(--creme); --band-ink: var(--tomate); }
+    .v-geneve { border-block: 2px solid var(--tomate); }
     @media (max-width: 640px) {
       .city .wrap {
         grid-template-areas: "name pill" "form form";
@@ -200,7 +205,7 @@
 
   <main>
     <section class="cities" aria-label="Les villes">
-      <div class="city c1">
+      <div class="city v-montpellier">
         <div class="wrap">
           <h3 class="city-name">Montpellier<span class="city-region">Palavas-les-Flots · Occitanie</span></h3>
           <span class="pill">À venir</span>
@@ -211,7 +216,7 @@
           </form>
         </div>
       </div>
-      <div class="city c2">
+      <div class="city v-paris">
         <div class="wrap">
           <h3 class="city-name">Paris<span class="city-region">Île-de-France</span></h3>
           <span class="pill">À venir</span>
@@ -222,7 +227,7 @@
           </form>
         </div>
       </div>
-      <div class="city c3">
+      <div class="city v-lyon">
         <div class="wrap">
           <h3 class="city-name">Lyon<span class="city-region">Auvergne-Rhône-Alpes</span></h3>
           <span class="pill">À venir</span>
@@ -233,7 +238,7 @@
           </form>
         </div>
       </div>
-      <div class="city c4">
+      <div class="city v-marseille">
         <div class="wrap">
           <h3 class="city-name">Marseille<span class="city-region">Provence</span></h3>
           <span class="pill">À venir</span>
@@ -244,7 +249,7 @@
           </form>
         </div>
       </div>
-      <div class="city c1">
+      <div class="city v-toulouse">
         <div class="wrap">
           <h3 class="city-name">Toulouse<span class="city-region">Occitanie</span></h3>
           <span class="pill">À venir</span>
@@ -255,7 +260,7 @@
           </form>
         </div>
       </div>
-      <div class="city c2">
+      <div class="city v-bordeaux">
         <div class="wrap">
           <h3 class="city-name">Bordeaux<span class="city-region">Nouvelle-Aquitaine</span></h3>
           <span class="pill">À venir</span>
@@ -266,7 +271,7 @@
           </form>
         </div>
       </div>
-      <div class="city c3">
+      <div class="city v-lille">
         <div class="wrap">
           <h3 class="city-name">Lille<span class="city-region">Hauts-de-France</span></h3>
           <span class="pill">À venir</span>
@@ -277,7 +282,7 @@
           </form>
         </div>
       </div>
-      <div class="city c4">
+      <div class="city v-nantes">
         <div class="wrap">
           <h3 class="city-name">Nantes<span class="city-region">Loire-Atlantique · Ouest</span></h3>
           <span class="pill">À venir</span>
@@ -288,7 +293,7 @@
           </form>
         </div>
       </div>
-      <div class="city c1">
+      <div class="city v-strasbourg">
         <div class="wrap">
           <h3 class="city-name">Strasbourg<span class="city-region">Alsace</span></h3>
           <span class="pill">À venir</span>
@@ -299,7 +304,7 @@
           </form>
         </div>
       </div>
-      <div class="city c2">
+      <div class="city v-geneve">
         <div class="wrap">
           <h3 class="city-name">Genève<span class="city-region">Suisse</span></h3>
           <span class="pill">À venir</span>
