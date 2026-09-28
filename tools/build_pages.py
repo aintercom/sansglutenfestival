@@ -227,7 +227,7 @@ def home():
 
 def city_page(c):
     slug, name, region, bg, ink, text = c
-    title = f"Sans Gluten Festival {name} · Food trucks sans gluten"
+    title = f"Sans Gluten Festival {name} · Le rendez-vous sans gluten"
     desc = (f"Le Sans Gluten Festival arrive à {name} : food trucks, bar et ambiance conviviale, "
             f"tout sans gluten. Inscrivez-vous pour connaître la date en premier.")
     path = f"/{slug}/"
@@ -254,7 +254,7 @@ def city_page(c):
     </section>
     <section class="wrap expect" aria-labelledby="attendre">
       <h2 id="attendre">Ce qui vous attend à {name}</h2>
-      <p class="lede" style="margin-top:14px;max-width:62ch">Quelques food trucks sans gluten, un bar, des tables et une ambiance conviviale. Petit, familial, et tout ce qui est servi est sans gluten.</p>
+      <p class="lede" style="margin-top:14px;max-width:62ch">Quelques food trucks, un bar, des tables et une ambiance conviviale. Petit, familial, et tout ce qui est servi est sans gluten.</p>
       <ul class="sans">{sans}</ul>
     </section>
     <section class="wrap others" aria-labelledby="autres">

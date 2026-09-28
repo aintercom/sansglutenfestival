@@ -164,3 +164,24 @@ a { color: inherit; }
 @media (max-width: 520px) {
   .foot-top { grid-template-columns: 1fr; gap: 32px; }
 }
+
+/* ---------- Effets : les bandes se déroulent, le nom glisse au survol ---------- */
+.city-name a { display: inline-block; transition: transform .25s ease; }
+.city-name a:hover { transform: translateX(8px); }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .cities .city {
+      animation: unroll linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 75%;
+    }
+    .cities .city .wrap {
+      animation: slide-in linear both;
+      animation-timeline: view();
+      animation-range: entry 20% entry 90%;
+    }
+  }
+}
+@keyframes unroll { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes slide-in { from { transform: translateX(-40px); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .city-name a { transition: none; } .city-name a:hover { transform: none; } }
