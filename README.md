@@ -1,7 +1,15 @@
 # SANS GLUTEN FESTIVAL
 
-Festival 100 % sans gluten, itinérant dans les grandes villes de France.
+Le rendez-vous sans gluten de votre ville : des petits événements à taille humaine, avec food trucks et bar, dans les grandes villes de France.
 
-À taille humaine, entrée à tarif symbolique, stands installés simplement, sans grands décors.
+🌐 [sansglutenfestival.fr](https://sansglutenfestival.fr) · 📸 [@sansglutenfestival](https://www.instagram.com/sansglutenfestival/)
 
-🌐 [sansglutenfestival.fr](https://sansglutenfestival.fr)
+## Modifier le site
+
+Les pages (accueil, une page par ville, 404, sitemap) sont générées par un script :
+
+```
+python3 tools/build_pages.py
+```
+
+Villes, textes et titres se modifient dans `tools/build_pages.py`. Le style est dans `assets/site.css`, les formulaires d'inscription (Web3Forms) dans `assets/site.js`.

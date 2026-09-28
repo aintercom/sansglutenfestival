@@ -1,0 +1,166 @@
+/* Zing Rust (Fontfabric) : titres, villes, bandeau */
+@font-face {
+  font-family: "Zing Rust";
+  src: url("/fonts/ZingRust-Base.woff2") format("woff2");
+  font-display: swap;
+}
+/* Palette « Tomate, basilic & framboise » */
+:root {
+  --creme: #F4ECDC;
+  --cacao: #2B1810;
+  --tomate: #D8391A;
+  --abricot: #FF8A1E;
+  --moutarde: #F4B400;
+  --citron: #D2EC3C;
+  --basilic: #0F6E3E;
+  --guimauve: #F7B9D2;
+  --framboise: #B3124E;
+  --lavande: #C3A6F4;
+  --prune: #3A1D5C;
+  --muted: #6E5A4C;
+  --foot-soft: #CDBFA9;
+  --display: "Zing Rust", "Arial Narrow", Impact, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--creme);
+  color: var(--cacao);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+.wrap { width: 100%; max-width: 880px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+.wide { max-width: 1120px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--tomate); outline-offset: 2px; }
+
+/* ---------- Bandeau défilant ---------- */
+.ticker { background: var(--creme); color: var(--cacao); overflow: hidden; border-bottom: 2px solid var(--cacao); }
+.tk-track { display: flex; width: max-content; animation: tk 42s linear infinite; }
+.ticker:hover .tk-track { animation-play-state: paused; }
+.tk-group { display: flex; align-items: center; flex-shrink: 0; }
+.tk-item { font-family: var(--display); font-size: 22px; line-height: 1; text-transform: uppercase; letter-spacing: .02em; white-space: nowrap; padding: 11px 0 9px; }
+.tk-grain { width: 20px; height: 12px; margin: 0 18px; flex-shrink: 0; }
+@keyframes tk { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .tk-track { animation: none; } .ticker { overflow-x: auto; } }
+@media (max-width: 600px) { .tk-item { font-size: 18px; } .tk-grain { margin: 0 14px; } }
+
+/* ---------- En-tête ---------- */
+.site-header { background: var(--cacao); }
+.site-header .wrap { display: flex; justify-content: center; padding-top: clamp(22px, 4vw, 34px); padding-bottom: clamp(22px, 4vw, 34px); }
+.logo { display: block; width: 300px; max-width: 62%; margin: 0; }
+.logo a, .logo img { display: block; width: 100%; height: auto; }
+@media (max-width: 600px) { .logo { width: 220px; } }
+
+/* ---------- Bandes des villes ---------- */
+.city { color: var(--band-ink); background: var(--band-bg); }
+.city .wrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "name pill" "name form";
+  column-gap: 24px; row-gap: 12px; align-items: center;
+  padding-top: 28px; padding-bottom: 28px;
+}
+.city-name { grid-area: name; font-family: var(--display); font-weight: 400; font-size: clamp(40px, 8vw, 76px); line-height: 1; letter-spacing: .01em; margin: 0; }
+.city-name a { text-decoration: none; }
+.city-name a:hover .city-more { text-decoration: underline; }
+.city-region { display: block; font-family: "Inter", system-ui, sans-serif; font-weight: 500; font-size: 14px; letter-spacing: .04em; opacity: .85; margin-top: 8px; }
+.city-more { font-weight: 700; }
+.pill { grid-area: pill; justify-self: end; align-self: end; border: 1.5px solid currentColor; border-radius: 999px; padding: 6px 16px; font-weight: 600; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+.notify { grid-area: form; align-self: start; display: flex; flex-wrap: wrap; gap: 8px; width: 320px; position: relative; }
+.notify input {
+  flex: 1; min-width: 0; font: inherit; font-size: 15px; color: var(--band-ink);
+  background: color-mix(in srgb, var(--band-ink) 12%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--band-ink) 45%, transparent);
+  border-radius: 999px; padding: 10px 16px;
+}
+.notify input::placeholder { color: var(--band-ink); opacity: .7; }
+.notify input:focus { outline: none; border-color: var(--band-ink); }
+.notify button { font: inherit; font-size: 15px; font-weight: 600; color: var(--band-bg); background: var(--band-ink); border: 0; border-radius: 999px; padding: 10px 20px; cursor: pointer; }
+.notify button:hover { opacity: .9; }
+.notify button:disabled { opacity: .6; cursor: wait; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.notify-err { flex-basis: 100%; font-size: 13px; font-weight: 600; margin-top: 4px; }
+.notify-done { grid-area: form; justify-self: end; font-size: 15px; font-weight: 500; margin: 0; }
+.v-montpellier { --band-bg: var(--tomate); --band-ink: var(--creme); }
+.v-paris { --band-bg: var(--basilic); --band-ink: var(--creme); }
+.v-lyon { --band-bg: var(--moutarde); --band-ink: var(--cacao); }
+.v-marseille { --band-bg: var(--citron); --band-ink: var(--basilic); }
+.v-toulouse { --band-bg: var(--guimauve); --band-ink: var(--framboise); }
+.v-bordeaux { --band-bg: var(--framboise); --band-ink: var(--guimauve); }
+.v-lille { --band-bg: var(--lavande); --band-ink: var(--prune); }
+.v-nantes { --band-bg: var(--abricot); --band-ink: var(--cacao); }
+.v-strasbourg { --band-bg: var(--prune); --band-ink: var(--abricot); }
+.v-geneve { --band-bg: var(--creme); --band-ink: var(--tomate); border-block: 2px solid var(--tomate); }
+@media (max-width: 640px) {
+  .city .wrap { grid-template-areas: "name pill" "form form"; row-gap: 16px; padding-top: 24px; padding-bottom: 24px; }
+  .pill { align-self: start; font-size: 12px; padding: 5px 12px; }
+  .notify { width: 100%; }
+  .notify-done { justify-self: start; }
+}
+
+/* ---------- Le concept (texte de la page d'accueil) ---------- */
+.about { padding-top: 72px; padding-bottom: 72px; }
+.about h2 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 56px); line-height: 1; margin: 0 0 16px; text-transform: uppercase; text-wrap: balance; }
+.about .lede { max-width: 62ch; margin: 0; font-size: 18px; }
+.sans { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.sans li { border-top: 2px solid var(--cacao); padding-top: 14px; }
+.sans b { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1.05; text-transform: uppercase; margin-bottom: 6px; }
+.sans svg { width: 22px; height: 13px; flex-shrink: 0; }
+.sans span { color: var(--muted); font-size: 16px; }
+@media (max-width: 700px) { .sans { grid-template-columns: 1fr; gap: 20px; } }
+
+/* ---------- Page d'une ville ---------- */
+.hero-city { color: var(--band-ink); background: var(--band-bg); }
+.hero-city .wrap { padding-top: clamp(40px, 8vw, 80px); padding-bottom: clamp(40px, 8vw, 72px); }
+.hero-city .kicker { font-weight: 800; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 10px; }
+.hero-city h1 { font-family: var(--display); font-weight: 400; font-size: clamp(64px, 15vw, 150px); line-height: .9; margin: 0; text-transform: uppercase; }
+.hero-city h1 small { display: block; font-size: .32em; line-height: 1.1; margin-bottom: .1em; }
+.hero-city h1 .name { display: block; padding-top: .14em; }
+.hero-city .intro { max-width: 58ch; font-size: 19px; line-height: 1.55; margin: 24px 0 0; }
+.hero-city .signup { margin-top: 32px; display: grid; gap: 10px; justify-items: start; }
+.hero-city .signup p { margin: 0; font-weight: 700; }
+.hero-city .notify { grid-area: auto; width: min(420px, 100%); }
+.hero-city .notify-done { justify-self: start; }
+.hero-city .pill { display: inline-block; margin-top: 22px; }
+.expect { padding-top: 64px; padding-bottom: 32px; }
+.expect h2, .others h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 5vw, 44px); line-height: 1; margin: 0; text-transform: uppercase; }
+.others { padding-top: 32px; padding-bottom: 72px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; padding: 0; list-style: none; }
+.chips a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; background: #FFF8EC; border: 1.5px solid var(--cacao); border-radius: 999px; padding: 8px 16px 8px 12px; font-weight: 700; font-size: 15px; }
+.chips a:hover { background: var(--cacao); color: var(--creme); }
+.chips svg { width: 18px; height: 11px; }
+.crumb { font-size: 14px; margin: 0 0 18px; }
+.crumb a { text-decoration: none; opacity: .85; }
+.crumb a:hover { text-decoration: underline; }
+
+/* ---------- Pied de page ---------- */
+.site-footer { background: var(--cacao); color: var(--creme); margin-top: 0; }
+.site-footer .wrap { padding-top: 56px; padding-bottom: 28px; }
+.foot-top { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 1fr); gap: 40px; }
+.foot-brand img { width: 200px; height: auto; display: block; }
+.foot-brand p { margin: 16px 0 0; color: var(--foot-soft); font-size: 15px; max-width: 30ch; }
+.foot-col h2 { font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--moutarde); margin: 0 0 14px; }
+.foot-cities { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 20px; }
+.foot-cities a, .foot-links a { text-decoration: none; display: inline-flex; align-items: center; gap: 9px; font-size: 15px; }
+.foot-cities a:hover, .foot-links a:hover { text-decoration: underline; }
+.foot-cities svg { width: 16px; height: 10px; flex-shrink: 0; }
+.foot-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.foot-links svg { width: 18px; height: 18px; flex-shrink: 0; }
+.foot-bottom { margin-top: 48px; padding-top: 18px; border-top: 1px solid color-mix(in srgb, var(--creme) 18%, transparent); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 13px; color: var(--foot-soft); }
+.foot-bottom p { margin: 0; }
+.foot-grains { display: flex; gap: 6px; align-items: center; }
+.foot-grains svg { width: 18px; height: 10px; }
+@media (max-width: 820px) {
+  .foot-top { grid-template-columns: 1fr 1fr; }
+  .foot-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+  .foot-top { grid-template-columns: 1fr; gap: 32px; }
+}
