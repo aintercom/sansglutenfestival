@@ -19,7 +19,6 @@
   <link rel="icon" href="favicon.png" type="image/png" sizes="64x64">
   <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="preload" href="img/logo-sgf.webp" as="image" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -76,6 +75,7 @@
     }
     .logo { display: block; width: min(560px, 86%); }
     .logo img { display: block; width: 100%; height: auto; }
+    @media (max-width: 600px) { .logo { width: min(320px, 78%); } }
     main { flex: 1; }
 
     .city {
@@ -204,6 +204,8 @@
     <div class="wrap">
       <h1 class="logo" style="margin:0">
         <picture>
+          <source media="(max-width: 600px)" srcset="img/logo-sgf-bloc.webp" type="image/webp">
+          <source media="(max-width: 600px)" srcset="img/logo-sgf-bloc.png" type="image/png">
           <source srcset="img/logo-sgf.webp" type="image/webp">
           <img src="img/logo-sgf.png" width="1400" height="495" alt="Sans Gluten Festival">
         </picture>
