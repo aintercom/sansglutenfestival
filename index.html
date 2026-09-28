@@ -155,6 +155,10 @@
       cursor: pointer;
     }
     .notify button:hover { opacity: .9; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .notify { position: relative; flex-wrap: wrap; }
+    .notify button:disabled { opacity: .6; cursor: wait; }
+    .notify-err { flex-basis: 100%; font-size: 13px; font-weight: 600; margin-top: 4px; }
     .notify-done {
       grid-area: form;
       justify-self: end;
@@ -232,6 +236,7 @@
           <form class="notify" data-city="Montpellier">
             <label class="sr" for="email-montpellier">Votre email pour être prévenu de la date à Montpellier</label>
             <input type="email" id="email-montpellier" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -243,6 +248,7 @@
           <form class="notify" data-city="Paris">
             <label class="sr" for="email-paris">Votre email pour être prévenu de la date à Paris</label>
             <input type="email" id="email-paris" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -254,6 +260,7 @@
           <form class="notify" data-city="Lyon">
             <label class="sr" for="email-lyon">Votre email pour être prévenu de la date à Lyon</label>
             <input type="email" id="email-lyon" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -265,6 +272,7 @@
           <form class="notify" data-city="Marseille">
             <label class="sr" for="email-marseille">Votre email pour être prévenu de la date à Marseille</label>
             <input type="email" id="email-marseille" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -276,6 +284,7 @@
           <form class="notify" data-city="Toulouse">
             <label class="sr" for="email-toulouse">Votre email pour être prévenu de la date à Toulouse</label>
             <input type="email" id="email-toulouse" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -287,6 +296,7 @@
           <form class="notify" data-city="Bordeaux">
             <label class="sr" for="email-bordeaux">Votre email pour être prévenu de la date à Bordeaux</label>
             <input type="email" id="email-bordeaux" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -298,6 +308,7 @@
           <form class="notify" data-city="Lille">
             <label class="sr" for="email-lille">Votre email pour être prévenu de la date à Lille</label>
             <input type="email" id="email-lille" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -309,6 +320,7 @@
           <form class="notify" data-city="Nantes">
             <label class="sr" for="email-nantes">Votre email pour être prévenu de la date à Nantes</label>
             <input type="email" id="email-nantes" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -320,6 +332,7 @@
           <form class="notify" data-city="Strasbourg">
             <label class="sr" for="email-strasbourg">Votre email pour être prévenu de la date à Strasbourg</label>
             <input type="email" id="email-strasbourg" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -331,6 +344,7 @@
           <form class="notify" data-city="Genève">
             <label class="sr" for="email-geneve">Votre email pour être prévenu de la date à Genève</label>
             <input type="email" id="email-geneve" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>
         </div>
@@ -350,20 +364,42 @@
     <p class="legal">Votre email sert uniquement à vous prévenir de la date du festival dans votre ville. Désinscription à tout moment.</p>
   </footer>
   <script>
-    // Pas encore de service d'inscription (Brevo à brancher) : en attendant,
-    // l'inscription passe par un mail pré-rempli vers contact@.
+    // Inscriptions par ville : Web3Forms envoie chaque inscription à contact@ (clé publique, faite pour être dans le code).
+    var W3F_KEY = "a4f6ae0e-dc1d-4ea9-b04a-1de9e9daf871";
     document.querySelectorAll('.notify').forEach(function (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var city = form.dataset.city;
-        var email = form.email.value.trim();
-        var subject = 'Prévenez-moi — Sans Gluten Festival ' + city;
-        var body = 'Bonjour,\n\nMerci de me prévenir de la date du Sans Gluten Festival à ' + city + '.\n\nMon email : ' + email + '\n';
-        window.location.href = 'mailto:contact@sansglutenfestival.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-        var done = document.createElement('p');
-        done.className = 'notify-done';
-        done.textContent = 'Merci ! Envoyez le mail qui vient de s’ouvrir pour confirmer.';
-        form.replaceWith(done);
+        var btn = form.querySelector('button');
+        if (form.botcheck && form.botcheck.checked) return;
+        btn.disabled = true;
+        btn.textContent = '…';
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: W3F_KEY,
+            subject: 'Prévenez-moi — ' + city,
+            from_name: 'Site Sans Gluten Festival',
+            ville: city,
+            email: form.email.value.trim()
+          })
+        }).then(function (r) { return r.json(); }).then(function (res) {
+          if (!res.success) throw new Error(res.message);
+          var done = document.createElement('p');
+          done.className = 'notify-done';
+          done.setAttribute('role', 'status');
+          done.textContent = 'Merci ! On vous prévient dès que la date de ' + city + ' est annoncée.';
+          form.replaceWith(done);
+        }).catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'OK';
+          var err = form.querySelector('.notify-err') || document.createElement('span');
+          err.className = 'notify-err';
+          err.setAttribute('role', 'alert');
+          err.textContent = 'L’envoi n’a pas marché. Réessayez, ou écrivez à contact@sansglutenfestival.fr';
+          form.appendChild(err);
+        });
       });
     });
   </script>
