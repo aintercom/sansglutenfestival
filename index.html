@@ -70,12 +70,12 @@
     .site-header .wrap {
       display: flex;
       justify-content: center;
-      padding-top: clamp(36px, 7vw, 64px);
-      padding-bottom: clamp(36px, 7vw, 64px);
+      padding-top: clamp(22px, 4vw, 34px);
+      padding-bottom: clamp(22px, 4vw, 34px);
     }
-    .logo { display: block; width: min(560px, 86%); }
+    .logo { display: block; width: 300px; max-width: 62%; }
     .logo img { display: block; width: 100%; height: auto; }
-    @media (max-width: 600px) { .logo { width: min(320px, 78%); } }
+    @media (max-width: 600px) { .logo { width: 220px; } }
     main { flex: 1; }
 
     .city {
@@ -204,8 +204,6 @@
     <div class="wrap">
       <h1 class="logo" style="margin:0">
         <picture>
-          <source media="(max-width: 600px)" srcset="img/logo-sgf-bloc.webp" type="image/webp">
-          <source media="(max-width: 600px)" srcset="img/logo-sgf-bloc.png" type="image/png">
           <source srcset="img/logo-sgf.webp" type="image/webp">
           <img src="img/logo-sgf.png" width="1400" height="495" alt="Sans Gluten Festival">
         </picture>
