@@ -10,9 +10,16 @@
   <meta property="og:url" content="https://sansglutenfestival.fr/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
-  <meta name="theme-color" content="#F4ECDC">
+  <meta property="og:image" content="https://sansglutenfestival.fr/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#2B1810">
   <link rel="canonical" href="https://sansglutenfestival.fr/">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="64x64">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" href="img/logo-sgf.webp" as="image" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -60,18 +67,15 @@
       margin: 0 auto;
       padding: 0 20px;
     }
-    header.wrap { padding-top: 28px; padding-bottom: 28px; }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 13px;
-      color: var(--tomate);
+    .site-header { background: var(--cacao); }
+    .site-header .wrap {
+      display: flex;
+      justify-content: center;
+      padding-top: clamp(36px, 7vw, 64px);
+      padding-bottom: clamp(36px, 7vw, 64px);
     }
-    .brand svg { width: 28px; height: 28px; }
+    .logo { display: block; width: min(560px, 86%); }
+    .logo img { display: block; width: 100%; height: auto; }
     main { flex: 1; }
 
     .city {
@@ -196,11 +200,15 @@
   </style>
 </head>
 <body>
-  <header class="wrap">
-    <span class="brand">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 7v18M16 12c-3 0-5-2-5-4 3 0 5 2 5 4zm0 0c3 0 5-2 5-4-3 0-5 2-5 4zm0 5c-3 0-5-2-5-4 3 0 5 2 5 4zm0 0c3 0 5-2 5-4-3 0-5 2-5 4z" fill="currentColor"/><path d="M6 26L26 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      Sans Gluten Festival
-    </span>
+  <header class="site-header">
+    <div class="wrap">
+      <h1 class="logo" style="margin:0">
+        <picture>
+          <source srcset="img/logo-sgf.webp" type="image/webp">
+          <img src="img/logo-sgf.png" width="1400" height="495" alt="Sans Gluten Festival">
+        </picture>
+      </h1>
+    </div>
   </header>
 
   <main>
