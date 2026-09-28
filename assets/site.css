@@ -62,9 +62,9 @@ a { color: inherit; }
 .city { color: var(--band-ink); background: var(--band-bg); }
 .city .wrap {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas: "name pill" "name form";
-  column-gap: 24px; row-gap: 12px; align-items: center;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "name pill" "name form" "name share";
+  column-gap: 24px; row-gap: 10px; align-items: center;
   padding-top: 28px; padding-bottom: 28px;
 }
 .city-name { grid-area: name; font-family: var(--display); font-weight: 400; font-size: clamp(40px, 8vw, 76px); line-height: 1; letter-spacing: .01em; margin: 0; }
@@ -97,9 +97,24 @@ a { color: inherit; }
 .v-lille { --band-bg: var(--lavande); --band-ink: var(--prune); }
 .v-nantes { --band-bg: var(--abricot); --band-ink: var(--cacao); }
 .v-strasbourg { --band-bg: var(--prune); --band-ink: var(--abricot); }
+.v-propose { --band-bg: #FFF8EC; --band-ink: var(--cacao); border-bottom: 2px dashed var(--cacao); }
+.v-propose .city-name { font-size: clamp(40px, 7vw, 64px); }
+.v-propose .city-region { max-width: 30ch; line-height: 1.4; }
+.notify.propose { width: 440px; }
+.share { grid-area: share; justify-self: end; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; text-decoration: none; opacity: .9; }
+.share:hover { opacity: 1; text-decoration: underline; }
+.share svg { width: 16px; height: 16px; }
+.hero-city .share { justify-self: start; margin-top: 4px; }
 .v-geneve { --band-bg: var(--creme); --band-ink: var(--tomate); border-block: 2px solid var(--tomate); }
 @media (max-width: 640px) {
-  .city .wrap { grid-template-areas: "name pill" "form form"; row-gap: 16px; padding-top: 24px; padding-bottom: 24px; }
+  .city .wrap { grid-template-areas: "name pill" "form form" "share share"; row-gap: 14px; padding-top: 24px; padding-bottom: 24px; }
+  .share { justify-self: start; }
+  .notify.propose { width: 100%; }
+  .notify.propose input { flex: 1 1 100%; }
+  .notify.propose button { flex: 1 1 100%; }
+  .v-propose .pill { display: none; }
+  .v-propose .wrap { grid-template-areas: "name name" "form form"; }
+  .notify.propose input, .notify.propose button { min-width: 0; }
   .pill { align-self: start; font-size: 12px; padding: 5px 12px; }
   .notify { width: 100%; }
   .notify-done { justify-self: start; }
@@ -127,6 +142,8 @@ a { color: inherit; }
 .hero-city .signup { margin-top: 32px; display: grid; gap: 10px; justify-items: start; }
 .hero-city .signup p { margin: 0; font-weight: 700; }
 .hero-city .notify { grid-area: auto; width: min(420px, 100%); }
+.hero-city .signup { grid-template-columns: minmax(0, 1fr); grid-template-areas: none; }
+.hero-city .share, .hero-city .notify-done { grid-area: auto; }
 .hero-city .notify-done { justify-self: start; }
 .hero-city .pill { display: inline-block; margin-top: 22px; }
 .expect { padding-top: 64px; padding-bottom: 32px; }

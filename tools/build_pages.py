@@ -69,7 +69,7 @@ def city_grain(slug, cls=""):
     return grain(c[3], cls)
 
 
-def head(title, desc, path, jsonld):
+def head(title, desc, path, jsonld, og="/img/og-image.png", og_alt="Logo du Sans Gluten Festival"):
     url = SITE + path
     return f"""<!doctype html>
 <html lang="fr">
@@ -86,10 +86,10 @@ def head(title, desc, path, jsonld):
   <meta property="og:url" content="{url}">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="{SITE}/img/og-image.png">
+  <meta property="og:image" content="{SITE}{og}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Logo du Sans Gluten Festival">
+  <meta property="og:image:alt" content="{escape(og_alt)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#2B1810">
   <link rel="icon" href="/favicon.png" type="image/png" sizes="64x64">
@@ -147,6 +147,17 @@ def form(city_slug, city_name, suffix=""):
             <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button type="submit">OK</button>
           </form>"""
+
+
+SHARE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 3v12M7.5 7.5 12 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
+
+def share(slug, name):
+    url = f"{SITE}/{slug}/"
+    text = f"Le Sans Gluten Festival arrive à {name} 🌾 Le rendez-vous sans gluten de votre ville : {url}"
+    from urllib.parse import quote
+    return (f'<a class="share" href="https://wa.me/?text={quote(text)}" target="_blank" rel="noopener" '
+            f'data-url="{url}" data-text="{escape(text)}">{SHARE_ICON}Prévenir un ami</a>')
 
 
 def footer():
@@ -208,6 +219,22 @@ def home():
           <h2 class="city-name"><a href="/{slug}/">{name}<span class="city-region">{region} · <span class="city-more">Voir la page</span></span></a></h2>
           <span class="pill">À venir</span>
           {form(slug, name)}
+          {share(slug, name)}
+        </div>
+      </div>
+"""
+    bands += """      <div class="city v-propose">
+        <div class="wrap">
+          <h2 class="city-name">Votre ville\u00a0?<span class="city-region">Elle n’est pas dans la liste\u00a0? Proposez-la, on regarde où aller ensuite.</span></h2>
+          <span class="pill">À proposer</span>
+          <form class="notify propose">
+            <label class="sr" for="propose-ville">Votre ville</label>
+            <input type="text" id="propose-ville" name="ville" placeholder="Votre ville" autocomplete="address-level2" required>
+            <label class="sr" for="propose-email">Votre email</label>
+            <input type="email" id="propose-email" name="email" placeholder="Votre email" autocomplete="email" required>
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit">OK</button>
+          </form>
         </div>
       </div>
 """
@@ -239,7 +266,7 @@ def city_page(c):
             {"@type": "ListItem", "position": 2, "name": name, "item": SITE + path}]}}]}
     others = "".join(f'<li><a href="/{o[0]}/">{city_grain(o[0])}{o[1]}</a></li>' for o in CITIES if o[0] != slug)
     sans = "".join(f'<li><b>{grain(GRAINS[i * 3])}{t}</b><span>{fr(d)}</span></li>' for i, (t, d) in enumerate(SANS))
-    body = head(title, desc, path, ld) + ticker() + header(False) + f"""  <main>
+    body = head(title, desc, path, ld, og=f"/img/og/{slug}.png", og_alt=f"Sans Gluten Festival {name}") + ticker() + header(False) + f"""  <main>
     <section class="hero-city v-{slug}">
       <div class="wrap">
         <p class="crumb"><a href="/">Accueil</a> › {name}</p>
@@ -249,6 +276,7 @@ def city_page(c):
         <div class="signup">
           <p>Soyez prévenu de la date en premier\u00a0:</p>
           {form(slug, name, "-page")}
+          {share(slug, name)}
         </div>
       </div>
     </section>
