@@ -67,6 +67,31 @@
       margin: 0 auto;
       padding: 0 20px;
     }
+    .ticker {
+      background: var(--creme);
+      color: var(--cacao);
+      overflow: hidden;
+      border-bottom: 2px solid var(--cacao);
+    }
+    .tk-track { display: flex; width: max-content; animation: tk 42s linear infinite; }
+    .ticker:hover .tk-track { animation-play-state: paused; }
+    .tk-group { display: flex; align-items: center; flex-shrink: 0; }
+    .tk-item {
+      font-family: "Zing Rust", "Fraunces", Georgia, serif;
+      font-size: 22px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      white-space: nowrap;
+      padding: 11px 0 9px;
+    }
+    .tk-grain { width: 20px; height: 12px; margin: 0 18px; flex-shrink: 0; }
+    @keyframes tk { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .tk-track { animation: none; }
+      .ticker { overflow-x: auto; }
+    }
+    @media (max-width: 600px) { .tk-item { font-size: 18px; } .tk-grain { margin: 0 14px; } }
     .site-header { background: var(--cacao); }
     .site-header .wrap {
       display: flex;
@@ -216,6 +241,13 @@
   </style>
 </head>
 <body>
+  <div class="ticker" role="region" aria-label="Au programme">
+    <p class="sr">Au programme : 5 food trucks, Un bar sans gluten, Ambiance conviviale, Sans chichi, Sans file d’attente, Sans lire les étiquettes.</p>
+    <div class="tk-track" aria-hidden="true">
+      <div class="tk-group"><span class="tk-item">5 food trucks</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--tomate)"/></svg><span class="tk-item">Un bar sans gluten</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--abricot)"/></svg><span class="tk-item">Ambiance conviviale</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--moutarde)"/></svg><span class="tk-item">Sans chichi</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--citron)"/></svg><span class="tk-item">Sans file d’attente</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--basilic)"/></svg><span class="tk-item">Sans lire les étiquettes</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--lavande)"/></svg><span class="tk-item">5 food trucks</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--prune)"/></svg><span class="tk-item">Un bar sans gluten</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--framboise)"/></svg><span class="tk-item">Ambiance conviviale</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--guimauve)"/></svg><span class="tk-item">Sans chichi</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--tomate)"/></svg><span class="tk-item">Sans file d’attente</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--abricot)"/></svg><span class="tk-item">Sans lire les étiquettes</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--moutarde)"/></svg></div>
+      <div class="tk-group"><span class="tk-item">5 food trucks</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--tomate)"/></svg><span class="tk-item">Un bar sans gluten</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--abricot)"/></svg><span class="tk-item">Ambiance conviviale</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--moutarde)"/></svg><span class="tk-item">Sans chichi</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--citron)"/></svg><span class="tk-item">Sans file d’attente</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--basilic)"/></svg><span class="tk-item">Sans lire les étiquettes</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--lavande)"/></svg><span class="tk-item">5 food trucks</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--prune)"/></svg><span class="tk-item">Un bar sans gluten</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--framboise)"/></svg><span class="tk-item">Ambiance conviviale</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--guimauve)"/></svg><span class="tk-item">Sans chichi</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--tomate)"/></svg><span class="tk-item">Sans file d’attente</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--abricot)"/></svg><span class="tk-item">Sans lire les étiquettes</span><svg class="tk-grain" viewBox="0 0 20 12"><ellipse cx="10" cy="6" rx="9" ry="5" transform="rotate(-24 10 6)" fill="var(--moutarde)"/></svg></div>
+    </div>
+  </div>
   <header class="site-header">
     <div class="wrap">
       <h1 class="logo" style="margin:0">
